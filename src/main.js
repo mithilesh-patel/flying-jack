@@ -1,8 +1,10 @@
 import kaboom from "kaboom";
 
 const FLOOR_HEIGHT = 48;
-const JUMP_FORCE = 700;
+const JUMP_FORCE = 750;
 const SPEED = 300;
+const GAP_BETN_PIPES = 300;
+
 
 // initialize context
 kaboom();
@@ -37,9 +39,9 @@ scene("game", () => {
     ]);
 
     function jump() {
-        if (player.isGrounded()) {
+        
             player.jump(JUMP_FORCE);
-        }
+        
     }
 
     // jump when user press space
@@ -48,9 +50,23 @@ scene("game", () => {
 
     function spawnTree() {
 
-        // add tree obj
+        const HEIGHTOFPIPE = rand(50, 400);
+        
+        // TOP PIPES 
         add([
-            rect(48, rand(32, 96)),
+            rect(90, height() ),
+            area(),
+            outline(4),
+            pos(width(), height() - FLOOR_HEIGHT - HEIGHTOFPIPE - GAP_BETN_PIPES),
+            anchor("botleft"),
+            color(255, 180, 255),
+            move(LEFT, SPEED),
+            "tree",
+        ]);      
+        
+        // BOTTOM PIPES 
+        add([
+            rect(90, HEIGHTOFPIPE),
             area(),
             outline(4),
             pos(width(), height() - FLOOR_HEIGHT),
@@ -61,13 +77,14 @@ scene("game", () => {
         ]);
 
         // wait a random amount of time to spawn next tree
-        wait(rand(0.5, 1.5), spawnTree);
+        wait(1.5, spawnTree);
 
     }
 
     // start spawning trees
     spawnTree();
-
+    
+    
     // lose if player collides with any game obj with tag "tree"
     player.onCollide("tree", () => {
         // go to "lose" scene and pass the score
