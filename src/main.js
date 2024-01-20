@@ -7,25 +7,21 @@ const GAP_BETN_PIPES = 300;
 
 
 // initialize context
-kaboom();
+kaboom({
+    background: [51, 151, 255], // Set the background color to RGB [51, 151, 255]
+  });
 
 // load assets
 loadSprite("bean", "sprites/bean.png");
 loadSprite("sad", "sprites/sad.png");
+loadSprite("cloud", "sprites/cloud.png");
 
 scene("game", () => {
 
     // define gravity
     setGravity(1600);
 
-    // add a game object to screen
-    const player = add([
-        // list of components
-        sprite("bean"),
-        pos(80, 40),
-        area(),
-        body()
-    ]);
+    
 
     // floor
     add([
@@ -47,6 +43,31 @@ scene("game", () => {
     // jump when user press space
     onKeyPress("space", jump);
     onClick(jump);
+
+
+    function spawnCloud() {
+              // CLOUD component 
+              
+              add([
+                sprite("cloud"),
+                pos(width(), rand(0, height() - 300)),
+                area(),
+                move(LEFT, SPEED-100),
+                scale(0.3)
+            ]);      
+
+            wait(1.5, spawnCloud);
+    }
+    spawnCloud();
+
+    // add a game object to screen
+    const player = add([
+        // list of components
+        sprite("bean"),
+        pos(80, 40),
+        area(),
+        body()
+    ]);
 
     function spawnPipe() {
 
@@ -89,7 +110,7 @@ scene("game", () => {
     player.onCollide("tree", () => {
         // go to "lose" scene and pass the score
         go("lose", score);
-        addKaboom(player.pos);
+        
     });
 
     // keep track of score
