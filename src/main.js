@@ -9,6 +9,7 @@ kaboom();
 
 // load assets
 loadSprite("bean", "sprites/bean.png");
+loadSprite("sad", "sprites/sad.png");
 
 scene("game", () => {
 
@@ -21,8 +22,7 @@ scene("game", () => {
         sprite("bean"),
         pos(80, 40),
         area(),
-        body(),
-        scale(0.5)
+        body()
     ]);
 
     // floor
@@ -100,7 +100,7 @@ scene("game", () => {
 scene("lose", (score) => {
 
     add([
-        sprite("bean"),
+        sprite("sad"),
         pos(width() / 2, height() / 2 - 80),
         scale(2),
         anchor("center"),
@@ -110,6 +110,23 @@ scene("lose", (score) => {
     add([
         text(score),
         pos(width() / 2, height() / 2 + 80),
+        scale(2),
+        anchor("center"),
+        color(rgb(0,0,0))
+    ]);
+ 
+
+    add([
+        text("Game Over"),
+        pos(width() / 2, (height() / 2)+ 60 + 80),
+        scale(2),
+        anchor("center"),
+        color(rgb(0,0,0))
+    ]);
+
+    add([
+        text("Click to play again"),
+        pos(width() / 2, (height() / 2)+ 120 + 80),
         scale(2),
         anchor("center"),
         color(rgb(0,0,0))
