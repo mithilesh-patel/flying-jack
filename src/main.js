@@ -48,7 +48,7 @@ scene("game", () => {
     onKeyPress("space", jump);
     onClick(jump);
 
-    function spawnTree() {
+    function spawnPipe() {
 
         const HEIGHTOFPIPE = rand(50, 400);
         
@@ -77,12 +77,12 @@ scene("game", () => {
         ]);
 
         // wait a random amount of time to spawn next tree
-        wait(1.5, spawnTree);
+        wait(1.5, spawnPipe);
 
     }
 
     // start spawning trees
-    spawnTree();
+    spawnPipe();
     
     
     // lose if player collides with any game obj with tag "tree"
