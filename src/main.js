@@ -5,7 +5,6 @@ const JUMP_FORCE = 750;
 const SPEED = 300;
 const GAP_BETN_PIPES = 300;
 
-
 // initialize context
 kaboom({
     background: [51, 151, 255], // Set the background color to RGB [51, 151, 255]
@@ -58,13 +57,14 @@ scene("game", () => {
 
             wait(1.5, spawnCloud);
     }
+
     spawnCloud();
 
     // add a game object to screen
     const player = add([
         // list of components
         sprite("bean"),
-        pos(80, 40),
+        pos(200, 40),
         area(),
         body()
     ]);
@@ -156,7 +156,7 @@ scene("lose", (score) => {
 
     add([
         text("Game Over"),
-        pos(width() / 2, (height() / 2)+ 60 + 80),
+        pos(width() / 2, (height() / 2)- 200),
         scale(2),
         anchor("center"),
         color(rgb(0,0,0))
