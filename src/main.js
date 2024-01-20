@@ -30,7 +30,7 @@ scene("game", () => {
         anchor("botleft"),
         area(),
         body({ isStatic: true }),
-        color(127, 200, 255),
+        color(0, 200, 0),
     ]);
 
     function jump() {
@@ -119,7 +119,7 @@ scene("game", () => {
     const scoreLabel = add([
         text(score),
         scale(2),
-        pos((width()/2 )-30, 240),
+        pos((width()/2 )-30, 100),
         color(rgb(0,0,0))
     ]);
 
